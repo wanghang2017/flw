@@ -1,0 +1,15 @@
+[
+  {
+    "userId":1,
+    "userName":"小小",
+    "password":"",
+    "userImg":"http://localhost:9000/img/users/default.png",
+    "userSex":0,
+    "cart":[
+      {
+        "productId":1,
+        "count":1
+      }
+    ]
+  }
+]
