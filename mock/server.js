@@ -4,6 +4,7 @@ let util = require("./util.js");
 let app = express();
 app.listen(9000);
 app.use(bodyParser.json());
+app.use(express.static(__dirname));
 app.use(function (req,res,next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:8080");
   res.header("Access-Control-Allow-Credentials",true);

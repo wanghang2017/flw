@@ -1,3 +1,4 @@
+let util = require("../util");
 let creator = function () {
   let ary = [];
   for (let i = 0; i<100; i++) {
@@ -33,7 +34,7 @@ let creator = function () {
       case 3:
         obj.productTitle="夏普(SHARP) KC-BB30-W1 升级款净化器除甲醛雾霾 加湿型空气净化器";
         obj.productInfo="BB30升级款 四层滤网，强力集尘 该商品支持分期付款";
-        obj.productImg="http://localhost:9000/img/products/computer.jpg";
+        obj.productImg="http://localhost:9000/img/products/household.jpg";
         obj.productPrice=Math.round(Math.random()*(1000-500)+500);
         obj.productClass="household";
         break;
@@ -43,6 +44,9 @@ let creator = function () {
   return ary;
 };
 
-console.log(creator());
 
+util.setData("./product.json",creator(),()=>{
+  console.log("成了");},(err)=>{
+  console.log("失败了");
+});
 
