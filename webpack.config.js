@@ -13,6 +13,7 @@ module.exports={
       {test:/\.(jpg|png|gif)$/,use:"url-loader"}
     ]
   },
+  devtool: "source-map",
   plugins:[
     new HtmlWebpackPlugin({
       template:"./index.html"

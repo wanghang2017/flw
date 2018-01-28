@@ -6,10 +6,10 @@ export default class Tab extends React.Component{
         return (
             <div className="tab-container">
              <ul className="tab-nav-box">
-               <li><Link to="/home">首页</Link></li>
-               <li><Link to="/classes">分类</Link></li>
-               <li><Link to="/cart">购物车</Link></li>
-               <li><Link to="/profile">个人中心</Link></li>
+               <li><Link to="/home"><em className="inconfont icon-wxbzhuye"></em><span>首页</span></Link></li>
+               <li><Link to="/classes"><em className="iconfont icon-tubiao-"></em><span>分类</span></Link></li>
+               <li><Link to="/cart"><em className="iconfont icon-gouwuche"></em><span>购物车</span></Link></li>
+               <li><Link to="/profile"><em className="iconfont icon-gerenzhongxin"></em><span>个人中心</span></Link></li>
              </ul>
             </div>
         )
