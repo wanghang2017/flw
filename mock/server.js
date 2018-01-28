@@ -17,6 +17,10 @@ app.use(function (req,res,next) {
 app.use(function (req,res,next) {
   util.getData("./data/product.json",(data)=>{
     req.productData = data;
+    req.productPhone = data.filter(item=>item.productClass=="phone");
+    req.productHousehold = data.filter(item=>item.productClass=="household");
+    req.productEarPhone = data.filter(item=>item.productClass=="earPhone");
+    req.productComputer = data.filter(item=>item.productClass=="computer");
     next();
   },res);
 });
@@ -90,7 +94,17 @@ app.get('/sliders',function (req,res) {
 });
 
 
-//获取首页商品列表
-app.get('/hot',function (rea,res) {
-
+//获取首页商品列表  {"phone":[],"computer":[],"household":[],"earPhone":[]}
+app.get('/homeHot',function (req,res) {
+  let obj = {};
+  let phone=[...req.productPhone];
+  let earPhone=[...req.productEarPhone];
+  let computer=[...req.productComputer];
+  let household=[...req.productHousehold];
+  phone=phone.sort((a,b)=>(b.productHot-a.productHot)).slice(0,3);
+  earPhone=earPhone.sort((a,b)=>(b.productHot-a.productHot)).slice(0,3);
+  computer=computer.sort((a,b)=>(b.productHot-a.productHot)).slice(0,3);
+  household=household.sort((a,b)=>(b.productHot-a.productHot)).slice(0,3);
+  obj={phone,earPhone,computer,household};
+  res.json(obj)
 });

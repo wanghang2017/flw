@@ -4,6 +4,9 @@ axios.interceptors.response.use((res)=>res.data);
 export let getSliders = ()=>{
   return axios.get("/sliders");
 };
+export let getHomeHot = ()=>{
+  return axios.get("/homeHot");
+};
 export let getOneProduct=(id)=>{
   return axios.get(`/product/${id}`);
 };

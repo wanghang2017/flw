@@ -9,3 +9,5 @@ let sliders = (state=[],actions)=>{
   }
   return state;
 };
+
+export default sliders;

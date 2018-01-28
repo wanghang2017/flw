@@ -2,33 +2,20 @@ import React from "react";
 export default class HotProducts extends React.Component{
   constructor(){
     super();
-
   }
     render(){
-        return (
+      return (
             <div className="home-hot-container">
-             <span>- 手机 -</span>
+             <span>- {this.props.title} -</span>
               <ul className="home-hot-imgBox">
-                <li>
-                  <img src="http://localhost:9000/img/products/phone.jpg"/>
-                  <p>小米手机</p>
-                  <p>为发烧而生</p>
-                  <p>￥1000</p>
-                </li>
-                <li>
-                  <img src="http://localhost:9000/img/products/phone.jpg"/>
-
-                  <p>小米手机</p>
-                  <p>为发烧而生</p>
-                  <p>￥1000</p>
-                </li>
-                <li>
-                  <img src="http://localhost:9000/img/products/phone.jpg"/>
-
-                  <p>小米手机</p>
-                  <p>为发烧而生</p>
-                  <p>￥1000</p>
-                </li>
+                {this.props.products.map((item,index)=>(
+                  <li key={index}>
+                    <img src={item.productImg}/>
+                    <p>{item.productTitle}</p>
+                    <p>{item.productInfo}</p>
+                    <p>￥{item.productPrice}</p>
+                  </li>
+                ))}
               </ul>
             </div>
         )
