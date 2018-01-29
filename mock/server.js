@@ -61,9 +61,34 @@ app.get("/product/:id",function (req,res) {
 //    hasMore:
 //    lists:[]
 // }
-app.get('/products/:offset/:limit/:productClass',function (req,res) {
-  console.log(req.params);
-  res.json(req.productData);
+app.get('/products/:productClass',function (req,res) {
+  console.log(req.params.productClass);
+  switch (req.params.productClass){
+    case "0":
+      res.json(req.productPhone);
+      break;
+    case "1":
+      res.json(req.productComputer);
+      break;
+    case "2":
+      res.json(req.productEarPhone);
+      break;
+    case "3":
+      res.json(req.productHousehold);
+      break;
+    case "hot":
+      res.json(req.productData.filter(item=>item.isHot));
+      break;
+    case "cheap":
+      res.json(req.productData.filter(item=>item.isCheap));
+      break;
+    default:
+      res.json({});
+      break;
+  }
+
+
+  // res.json(req.productData);
 });
 //用户登陆
 app.get('/login',function (req,res) {

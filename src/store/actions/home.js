@@ -7,7 +7,6 @@ let setHomeHot = ()=>{
 };
 let updateSetHomeHot = ()=>{
   return (dispatch,getState)=>{
-    console.log(getState(),"hahaah");
     dispatch({type:Types.UPDATE_HOME_HOT,payload:updateHomeHot()});
   }
 };
