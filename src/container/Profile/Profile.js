@@ -10,7 +10,7 @@ export default class Profile extends React.Component{
                 <div className="profile-container">
                     <Link to="/proDetail">
                         <div className="profile-info">
-                            <img src="" alt=""/>
+                            <img src="http://localhost:9000/img/users/default.png" alt=""/>
                             <p>哈哈</p>
                             <p>用户等级 : 银牌会员</p>
                             <p>积分:0</p>

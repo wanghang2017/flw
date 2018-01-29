@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {withRouter} from "react-router-dom"
+import {withRouter,Link} from "react-router-dom"
 import "./Header.less";
 @withRouter
 export default class Header extends React.Component{
@@ -17,7 +17,7 @@ export default class Header extends React.Component{
             <div className="header-container">
               {this.props.hasBack?<em className="iconfont icon-fanhui" onClick={this.handleClick}></em>:null}
                 <span>{this.props.title}</span>
-              {this.props.hasSearch?<em className="header-search"></em>:null}
+              {this.props.hasSearch?<Link to="/reg">注册</Link>:null}
             </div>
         )
     }

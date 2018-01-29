@@ -7,12 +7,18 @@ export let getSliders = ()=>{
 export let getHomeHot = ()=>{
   return axios.get("/homeHot");
 };
+
+export let getProducts=(type)=>{
+  return axios.get(`/products/${type}`);
+};
+
+
 export let getOneProduct=(id)=>{
   return axios.get(`/product/${id}`);
 };
-export let getProducts=(offset,limit,type)=>{
-  return axios.get(`/products/${offset}/${limit}/${type}`);
-};
+// export let getProducts=(offset,limit,type)=>{
+//   return axios.get(`/products/${offset}/${limit}/${type}`);
+// };
 export let getHotProducts=(offset,limit,type)=>{
   return axios.get();
 };

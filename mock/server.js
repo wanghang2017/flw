@@ -108,3 +108,30 @@ app.get('/homeHot',function (req,res) {
   obj={phone,earPhone,computer,household};
   res.json(obj)
 });
+
+//通过不同类型获取商品列表
+app.get('/products/:classes',(req,res)=>{
+  let classes = req.params.classes;
+  switch (classes){
+    case "0":
+      res.json(req.productPhone);
+      break;
+    case "1":
+      res.json(req.productEarPhone);
+      break;
+    case "2":
+      res.json(req.productComputer);
+      break;
+    case "3":
+      res.json(req.productHousehold);
+      break;
+    case "hot":
+      res.json(req.productData.filter(item=>item.isHot));
+      break;
+    case "cheap":
+      res.json(req.productData.filter(item=>item.isCheap));
+      break;
+    default :
+      res.json([]);
+  }
+});

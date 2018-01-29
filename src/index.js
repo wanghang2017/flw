@@ -27,7 +27,7 @@ ReactDOM.render(
           <Route path="/profile" component={Profile}/>
           <Route path="/proDetail" component={ProDetail}/>
           <Route path="/lists/:type" component={Lists}/>
-          <Route path="/godDetail" component={GodDetail}/>
+          <Route path="/godDetail/:id" component={GodDetail}/>
           <Route path="/reg" component={Reg}/>
           <Route path="/login" component={Login}/>
           <Route path="/blank" component={Blank}/>
