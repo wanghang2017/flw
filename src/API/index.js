@@ -7,6 +7,10 @@ export let getSliders = ()=>{
 export let getHomeHot = ()=>{
   return axios.get("/homeHot");
 };
+export let updateHomeHot=()=>{
+  return axios.get("/updateHomeHot");
+};
+
 
 export let getProducts=(type)=>{
   return axios.get(`/products/${type}`);

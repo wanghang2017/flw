@@ -5,6 +5,7 @@ export default class HotProducts extends React.Component{
     super();
   }
     render(){
+      console.log(this.props);
       return (
             <div className="home-hot-container">
              <span>- {this.props.title} -</span>

@@ -135,3 +135,30 @@ app.get('/products/:classes',(req,res)=>{
       res.json([]);
   }
 });
+
+
+//更新热门商品的算法
+function updateNewHot(ary) {
+  let newAry=[];
+  for (let i = 0; i < 3; i++) {
+    let index = Math.round(Math.random()*(ary.length-1));
+    newAry.push(ary[index]);
+  }
+  return newAry;
+}
+//重新更新首页热门商品
+app.get('/updateHomeHot',function (req,res) {
+  let obj = {};
+  let phone=req.productPhone.filter(item=>item.productHot>1000);
+  let earPhone=req.productEarPhone.filter(item=>item.productHot>1000);
+  let computer=req.productComputer.filter(item=>item.productHot>1000);
+  let household=req.productHousehold.filter(item=>item.productHot>1000);
+  phone = updateNewHot(phone);
+  earPhone = updateNewHot(earPhone);
+  computer = updateNewHot(computer);
+  household = updateNewHot(household);
+  obj={phone,earPhone,computer,household};
+  res.json(obj)
+});
+
+
