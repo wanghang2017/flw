@@ -5,9 +5,9 @@ import "./Header.less";
 @withRouter
 export default class Header extends React.Component{
     static propsTypes={
-      title:PropTypes.string,
-      hasBack:PropTypes.bool,
-      hasSearch:PropTypes.bool
+      title:PropTypes.string.isRequired,
+      hasBack:PropTypes.bool.isRequired,
+      hasSearch:PropTypes.bool.isRequired
     };
     handleClick=()=>{
       this.props.history.goBack();

@@ -21,6 +21,8 @@ app.use(function (req,res,next) {
     req.productHousehold = data.filter(item=>item.productClass=="household");
     req.productEarPhone = data.filter(item=>item.productClass=="earPhone");
     req.productComputer = data.filter(item=>item.productClass=="computer");
+    req.productHot = data.filter(item=>item.isHot);
+    req.productCheap = data.filter(item=>item.isCheap);
     next();
   },res);
 });
@@ -62,7 +64,6 @@ app.get("/product/:id",function (req,res) {
 //    lists:[]
 // }
 app.get('/products/:productClass',function (req,res) {
-  console.log(req.params.productClass);
   switch (req.params.productClass){
     case "0":
       res.json(req.productPhone);
@@ -77,39 +78,16 @@ app.get('/products/:productClass',function (req,res) {
       res.json(req.productHousehold);
       break;
     case "hot":
-      res.json(req.productData.filter(item=>item.isHot));
+      res.json(req.productHot);
       break;
     case "cheap":
-      res.json(req.productData.filter(item=>item.isCheap));
+      res.json(req.productCheap);
       break;
     default:
       res.json({});
       break;
   }
-
-
-  // res.json(req.productData);
 });
-//用户登陆
-app.get('/login',function (req,res) {
-  res.send(req.userData);
-});
-//用户注册:
-app.post('/reg',function (req,res) {
-
-});
-//修改用户信息
-
-
-//获取购物车信息
-app.get('/getCar',function (req,res) {
-
-});
-//购物车添加商品
-
-
-
-//购物车删除商品
 
 
 
@@ -117,8 +95,6 @@ app.get('/getCar',function (req,res) {
 app.get('/sliders',function (req,res) {
   res.json(req.slidersData);
 });
-
-
 //获取首页商品列表  {"phone":[],"computer":[],"household":[],"earPhone":[]}
 app.get('/homeHot',function (req,res) {
   let obj = {};
@@ -134,39 +110,17 @@ app.get('/homeHot',function (req,res) {
   res.json(obj)
 });
 
-//通过不同类型获取商品列表
-app.get('/products/:classes',(req,res)=>{
-  let classes = req.params.classes;
-  switch (classes){
-    case "0":
-      res.json(req.productPhone);
-      break;
-    case "1":
-      res.json(req.productEarPhone);
-      break;
-    case "2":
-      res.json(req.productComputer);
-      break;
-    case "3":
-      res.json(req.productHousehold);
-      break;
-    case "hot":
-      res.json(req.productData.filter(item=>item.isHot));
-      break;
-    case "cheap":
-      res.json(req.productData.filter(item=>item.isCheap));
-      break;
-    default :
-      res.json([]);
-  }
-});
+
 
 
 //更新热门商品的算法
 function updateNewHot(ary) {
   let newAry=[];
-  for (let i = 0; i < 3; i++) {
+  let obj={};
+  while(Object.keys(obj).length<3) {
     let index = Math.round(Math.random()*(ary.length-1));
+    if(obj[index]===index)continue;
+    obj[index] = index;
     newAry.push(ary[index]);
   }
   return newAry;
@@ -183,7 +137,32 @@ app.get('/updateHomeHot',function (req,res) {
   computer = updateNewHot(computer);
   household = updateNewHot(household);
   obj={phone,earPhone,computer,household};
-  res.json(obj)
+  res.json(obj);
 });
+
+
+//购物车添加商品
+
+
+
+//购物车删除商品
+
+
+
+//获取购物车信息
+app.get('/getCar',function (req,res) {
+
+});
+
+//用户登陆
+app.get('/login',function (req,res) {
+  res.send(req.userData);
+});
+//用户注册:
+app.post('/reg',function (req,res) {
+
+});
+//修改用户信息
+
 
 

@@ -1,15 +1,15 @@
 function pullRefresh(ele,cb,endCb) {
   let startY;
   let moveY;
-  let beginY = ele.offsetTop;
   function move(e) {
     moveY = e.touches[0].pageY-startY;
-    cb(beginY+moveY);
+    if(moveY>200){return;}
+    cb(moveY);
   }
   function end() {
     ele.style.transition="all .3s";
     cb(0);
-    if(moveY>=80){
+    if(moveY>=100){
       endCb();
     }
     ele.removeEventListener("touchmove",move);

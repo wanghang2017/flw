@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import App from "./container/App";
 import Cart from "./container/Cart/Cart";
-import {HashRouter as Router,Route,Switch} from "react-router-dom";
+import {HashRouter as Router,Route,Switch,Redirect} from "react-router-dom";
 import Home from "./container/Home/Home";
 import Classes from "./container/Classes/Classes";
 import Profile from "./container/Profile/Profile";
@@ -31,7 +31,7 @@ ReactDOM.render(
           <Route path="/reg" component={Reg}/>
           <Route path="/login" component={Login}/>
           <Route path="/blank" component={Blank}/>
-          <Route path="/" component={Home}/>
+          <Redirect to="/home"/>
         </Switch>
       </App>
     </Router>
