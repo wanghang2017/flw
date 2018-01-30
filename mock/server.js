@@ -2,8 +2,14 @@ let express = require("express");
 let bodyParser = require("body-parser");
 let util = require("./util.js");
 let app = express();
+let session = require("express-session");
 app.listen(9000);
 app.use(bodyParser.json());
+app.use(session({
+  resave:true,    //每次重新保存
+  saveUninitialized:false,
+  secret:'hhh',
+}));
 app.use(express.static(__dirname));
 app.use(function (req,res,next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:8080");
@@ -57,7 +63,6 @@ app.get("/product/:id",function (req,res) {
   let product = req.productData.find(item=>item.productId==id);
   res.json(product);
 });
-
 //获取商品列表（offset,limit,hasmore） 返回:
 //{
 //    hasMore:
@@ -89,8 +94,6 @@ app.get('/products/:productClass',function (req,res) {
   }
 });
 
-
-
 //获取轮播图信息
 app.get('/sliders',function (req,res) {
   res.json(req.slidersData);
@@ -109,10 +112,6 @@ app.get('/homeHot',function (req,res) {
   obj={phone,earPhone,computer,household};
   res.json(obj)
 });
-
-
-
-
 //更新热门商品的算法
 function updateNewHot(ary) {
   let newAry=[];
@@ -154,12 +153,45 @@ app.get('/getCar',function (req,res) {
 
 });
 
+
+
+
+let crypto = require('crypto');
 //用户登陆
-app.get('/login',function (req,res) {
-  res.send(req.userData);
+app.post('/login',function (req,res) {
+  let{username,password} = req.body;
+  let user= req.userData.find(item=>item.userName==username);
+  if(user.password== crypto.createHash('md5').update(password).digest('base64')){
+    res.json({success:"登陆成功",user})
+  }else{
+    res.json({success:"",fail:"账号或密码错误",user:{}});
+  }
 });
+
+
+
+
 //用户注册:
 app.post('/reg',function (req,res) {
+  let obj = {};
+  let{username,password,sex} = req.body;
+  if(req.userData.find(item=>item.userName==username)){
+    res.json({fail:"注册失败,已经存在的用户名"});
+    return ;
+  }
+  obj.userName=username;
+  password = crypto.createHash('md5').update(password).digest('base64');
+  obj.password = password;
+  obj.userId = new Date().getTime();
+  obj.userImg="http://localhost:9000/img/users/default.png";
+  obj.userSex = sex||0;
+  obj.cart=[];
+  req.userData.push(obj);
+  util.setData("./data/user.json",req.userData,()=>{
+    res.json({success:"注册成功"});
+  },()=>{
+    res.json({fail:"注册失败"})
+  });
 
 });
 //修改用户信息

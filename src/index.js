@@ -15,6 +15,12 @@ import Reg from "./container/Reg/Reg";
 import Login from "./container/Login/Login";
 import Blank from "./container/Blank/Blank";
 import store from "./store/index";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+
+
+
+
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -24,7 +30,7 @@ ReactDOM.render(
           <Route path="/home" component={Home}/>
           <Route path="/cart" component={Cart}/>
           <Route path="/classes" component={Classes}/>
-          <Route path="/profile" component={Profile}/>
+          <ProtectedRoute path="/profile" component={Profile}/>
           <Route path="/proDetail" component={ProDetail}/>
           <Route path="/lists/:type" component={Lists}/>
           <Route path="/godDetail/:id" component={GodDetail}/>

@@ -21,9 +21,17 @@ export let getProducts=(type)=>{
 export let getOneProduct=(id)=>{
   return axios.get(`/product/${id}`);
 };
-export let login=()=>{
 
+
+
+
+//登陆
+export let login=(data)=>{
+  return axios.post(`/login`,data);
 };
-export let reg=()=>{
 
+
+//注册
+export let reg=(data)=>{
+  return axios.post(`/reg`,data);
 };

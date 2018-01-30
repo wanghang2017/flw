@@ -7,3 +7,5 @@ export const PHONE = "phone";
 export const COMPUTER = "computer";
 export const EARPHONE = "earphone";
 export const HOUSEHOLD = "household";
+export const SET_USER = "set_user";
+export const GET_USER = "get_user";
