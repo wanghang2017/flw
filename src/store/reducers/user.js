@@ -5,6 +5,10 @@ let user = (state={login:{},reg:{}},actions)=>{
       return {...state,login:{...actions.payload}};
     case Types.SET_USER:
       return {...state,reg:{...actions.payload}};
+    case Types.CLEAR_REG:
+      return {...state,reg:{}};
+    case Types.CLEAR_LOGIN:
+      return {...state,login:{}};
   }
   return state;
 };

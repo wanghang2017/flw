@@ -22,16 +22,15 @@ export let getOneProduct=(id)=>{
   return axios.get(`/product/${id}`);
 };
 
-
-
-
 //登陆
 export let login=(data)=>{
   return axios.post(`/login`,data);
 };
-
-
 //注册
 export let reg=(data)=>{
   return axios.post(`/reg`,data);
+};
+
+export let getProduct=(id)=>{
+  return axios.get(`/product/${id}`);
 };

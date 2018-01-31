@@ -14,4 +14,20 @@ let getUser = (user)=>{
     dispatch({type:Types.GET_USER,payload:login(user)});
   }
 };
-export default {setUser,getUser};
+
+
+//退出登陆
+let clearLogin = ()=>{
+  return {
+    type:Types.CLEAR_LOGIN
+  }
+};
+//清空注册
+let clearReg = ()=>{
+  return{
+    type:Types.CLEAR_REG
+  }
+};
+
+
+export default {setUser,getUser,clearLogin,clearReg};

@@ -10,7 +10,7 @@ export default class Header extends React.Component{
       hasSearch:PropTypes.bool.isRequired
     };
     handleClick=()=>{
-      this.props.history.goBack();
+      this.props.history.push("/home");
     };
     render(){
         return (

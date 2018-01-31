@@ -6,6 +6,13 @@ import actions from "../../store/actions/products";
 import {Link} from "react-router-dom";
 @connect(state=>({...state}),actions)
 export default class Lists extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      products:[],
+      status:1
+    }
+  }
     componentWillMount(){
       let title = "商品列表";
       let type = this.props.match.params.type;
@@ -36,14 +43,52 @@ export default class Lists extends React.Component{
       this.myType = type;
       //todo 获取详情，如果state里面没有则重新加载
     }
+    componentWillReceiveProps(newProps){
+      if(!newProps.products){return;}
+      this.setState({
+        products:newProps.products[this.myType]
+      })
+    }
     //todo  点击排序 重新从后台加载数据
   //todo 懒加载  滑动到一定距离加载再加载数据
+  handleClick=(e)=>{
+
+      let{target} = e;
+      target = target.parentNode;
+      if(target.tagName==="LI"){
+        let ary = [...this.state.products];
+        let orderBy = target.children[0].innerHTML;
+        switch (orderBy){
+          case "销量":
+            ary.sort((a,b)=>(a.productHot-b.productHot)*this.state.status);
+            this.setState({
+              products:ary,
+              status:this.state.status*-1
+            });
+            break;
+          case "价格":
+            ary.sort((a,b)=>(a.productPrice-b.productPrice)*this.state.status);
+            this.setState({
+              products:ary,
+              status:this.state.status*-1
+            });
+            break;
+          case "评论":
+            ary.sort((a,b)=>(a.productQuality-b.productQuality)*this.state.status);
+            this.setState({
+              products:ary,
+              status:this.state.status*-1
+            });
+            break;
+        }
+      }
+    };
     render(){
       return (
             <div>
                 <Header hasBack={true} hasSearch={false} title={this.title}/>
               <div className="sortHeader">
-                <ul >
+                <ul onClick={(e)=>{this.handleClick(e)}}>
                   <li><span>销量</span><em></em></li>
                   <li><span>价格</span><em></em></li>
                   <li><span>评论</span><em></em></li>
@@ -51,7 +96,7 @@ export default class Lists extends React.Component{
               </div>
                 <div className="lists-container">
                     <ul className="lists-box">
-                      {this.props.products[this.myType].map((item,index)=>(
+                      {this.state.products.map((item,index)=>(
                         <Link to={{pathname:`/godDetail/${item.productId}`,state:item}} key={index}>
                           <li className="lists-item" >
                             <img src={item.productImg}/>

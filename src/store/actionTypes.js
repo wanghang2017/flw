@@ -9,3 +9,6 @@ export const EARPHONE = "earphone";
 export const HOUSEHOLD = "household";
 export const SET_USER = "set_user";
 export const GET_USER = "get_user";
+export const SET_PRODUCT = "set_product";
+export const CLEAR_REG = "clear_reg";
+export const CLEAR_LOGIN = "clear_login";

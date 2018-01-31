@@ -2,6 +2,9 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import "./GodDetail.less";
 import GodTab from "./GodTab";
+import {connect} from "react-redux";
+import actions from "../../store/actions/product"
+@connect(state=>state,actions)
 export default class GodDetail extends React.Component{
     componentWillMount(){
       //todo  首先进来判断state是否有值，如果没有，去state里面找，state里面没有，访问后台

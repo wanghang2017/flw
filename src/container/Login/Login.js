@@ -1,13 +1,31 @@
 import React from "react";
 import Header from "../../components/Header/Header";
-import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import actions from "../../store/actions/user";
 import "./Login.less";
 @connect(state=>({...state.user}),actions)
 export default class Login extends React.Component{
+  constructor(){
+    super();
+    this.state={
+      info:"",
+      status:0
+    }
+  }
   handleClick=()=>{
     let obj ={};
+    if(!this.usn.value){
+      this.setState({
+        info:"用户名不可为空"
+      });
+      return;
+    }
+    if(!this.psw.value){
+      this.setState({
+        info:"密码不可为空",
+      });
+      return;
+    }
     obj.username=this.usn.value;
     obj.password = this.psw.value;
     this.props.getUser(obj);
@@ -15,7 +33,19 @@ export default class Login extends React.Component{
   componentWillReceiveProps(newProps){
     console.log(newProps.login.success);
     if(newProps.login.success&&(newProps.login.success.length>0)){
-      this.props.history.push("/profile");
+      this.setState({
+        info:newProps.login.success,
+        status:1,
+      });
+
+      setTimeout(()=>{
+        this.props.history.push("/profile");
+      },2000);
+    }
+    if(newProps.login.fail&&newProps.login.fail.length>0){
+      this.setState({
+        info:newProps.login.fail
+      })
     }
   }
     render(){
@@ -34,9 +64,10 @@ export default class Login extends React.Component{
                       <input type="text" id="password" ref={x=>this.psw = x}/>
                     </li>
                     <li>
-
-                      <Link to={'/reg'}>前往注册</Link>
-                      <i>忘记密码</i>
+                      <div>
+                        {this.state.info.length>0?<span className={this.state.status===1?"ok":""}>{this.state.info}</span>:null}
+                        <i>忘记密码</i>
+                      </div>
                     </li>
                     <li>
                     </li>

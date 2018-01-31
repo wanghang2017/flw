@@ -36,6 +36,7 @@ app.use(function (req,res,next) {
   util.getData("./data/sliders.json",(data)=>{
     // console.log(data);
     req.slidersData = data;
+    ''
     next();
   },res);
 });
@@ -161,6 +162,9 @@ let crypto = require('crypto');
 app.post('/login',function (req,res) {
   let{username,password} = req.body;
   let user= req.userData.find(item=>item.userName==username);
+  if(!user){
+    res.json({success:"",fail:"不存在的用户名",user:{}});
+  }
   if(user.password== crypto.createHash('md5').update(password).digest('base64')){
     res.json({success:"登陆成功",user})
   }else{

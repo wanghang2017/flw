@@ -13,6 +13,7 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      overflow: auto;
       label{
         line-height: 50px;
       }
@@ -20,15 +21,18 @@
         border: 1px solid #dfdfdf;
         height: 35px;
       }
-      a{
-        color:#51a7eb;
-        line-height: 45px;
-        width: 30%;
+      span{
+        float: right;
+        color:red;
+        line-height: 50px;
+        &.ok{
+          color:green;
+        }
       }
       i{
-        position: absolute;
+        float: left;
         right: 0;
-        top: 12px;
+        line-height: 50px;
         color:#51a7eb;
         font-style: normal;
       }
