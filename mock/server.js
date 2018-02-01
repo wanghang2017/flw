@@ -142,7 +142,10 @@ app.get('/updateHomeHot',function (req,res) {
 
 
 //购物车添加商品
+app.post("/addcar",function (req,res) {
+  let {productId,count,userId} = req.body;
 
+});
 
 
 //购物车删除商品

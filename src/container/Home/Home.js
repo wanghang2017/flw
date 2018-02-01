@@ -34,6 +34,7 @@ export default class Home extends React.Component{
     utils.pullRefresh(this.x,this.setTop,this.update);
   }
     render(){
+      console.log(this.props);
       let {homeHot} =this.props;
       return (
             <div className="home-container" ref = {x=>this.x=x} style={{top:`${this.state.top}px`}}>

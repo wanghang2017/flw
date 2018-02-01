@@ -16,12 +16,6 @@ import Login from "./container/Login/Login";
 import Blank from "./container/Blank/Blank";
 import store from "./store/index";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-
-
-
-
-
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>
