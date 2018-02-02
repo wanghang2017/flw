@@ -1,4 +1,4 @@
-import {login,reg} from "../../API/index";
+import {login,reg,getNewCart} from "../../API/index";
 import * as Types from "../actionTypes";
 
 //注册
@@ -26,6 +26,15 @@ let clearLogin = ()=>{
 let clearReg = ()=>{
   return{
     type:Types.CLEAR_REG
+  }
+};
+
+let updateNewCart = (userId)=>{
+  return ()=>{
+    return {
+      type:Types.UPDATE_NEW_CART,
+      payload:getNewCart(userId)
+    }
   }
 };
 

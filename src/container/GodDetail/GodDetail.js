@@ -9,10 +9,11 @@ export default class GodDetail extends React.Component{
     componentWillMount(){
       //todo  首先进来判断state是否有值，如果没有，去state里面找，state里面没有，访问后台
         if(!this.props.location.state){
-
+          this.props.setProduct(this.props.match.params.id);
         }
     }
     render(){
+      console.log(this.props);
       let state = this.props.location.state;
       return (
             <div>

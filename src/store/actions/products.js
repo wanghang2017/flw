@@ -27,4 +27,7 @@ let setProducts=(myType)=>{
   }
 };
 
+
+
+
 export default {setProducts};

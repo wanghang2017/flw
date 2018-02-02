@@ -9,6 +9,8 @@ let user = (state={login:{},reg:{}},actions)=>{
       return {...state,reg:{}};
     case Types.CLEAR_LOGIN:
       return {...state,login:{}};
+    case Types.UPDATE_NEW_CART:
+      return {...state,login:{...state.login,user:{...actions.payload}}}
   }
   return state;
 };

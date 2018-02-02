@@ -2,6 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 import "./Classes.less";
 import Header from "../../components/Header/Header";
+import Tab from "../../components/Tab/Tab";
+import {connect} from "react-redux";
+@connect(state=>({...state.user}))
 export default class Classes extends React.Component{
     render(){
         return (
@@ -39,6 +42,7 @@ export default class Classes extends React.Component{
                       </li>
                   </ul>
               </div>
+              <Tab count={this.props.login}/>
           </div>
         )
     }

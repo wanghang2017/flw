@@ -1,5 +1,6 @@
 let express = require("express");
 let bodyParser = require("body-parser");
+let path = require("path");
 let util = require("./util.js");
 let app = express();
 let session = require("express-session");
@@ -10,7 +11,7 @@ app.use(session({
   saveUninitialized:false,
   secret:'hhh',
 }));
-app.use(express.static(__dirname));
+app.use(express.static(path.resolve(__dirname,"../dist")));
 app.use(function (req,res,next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:8080");
   res.header("Access-Control-Allow-Credentials",true);
@@ -36,7 +37,6 @@ app.use(function (req,res,next) {
   util.getData("./data/sliders.json",(data)=>{
     // console.log(data);
     req.slidersData = data;
-    ''
     next();
   },res);
 });
@@ -142,19 +142,53 @@ app.get('/updateHomeHot',function (req,res) {
 
 
 //购物车添加商品
-app.post("/addcar",function (req,res) {
+app.post("/addproducttocar",function (req,res) {
   let {productId,count,userId} = req.body;
+  let user =req.userData.find(item=>item.userId == userId);
+  let product = user.cart.find(item=>item.productId == productId);
+  if(product){
+    product.count = count;
+  }else{
+    user.cart.push({productId,count});
+  }
+  console.log(JSON.stringify(req.userData));
+  // util.setData("./data/user.json",)
+  util.setData("./data/user.json",req.userData,()=>{
+    res.json({user,success:"添加成功"});
+  },()=>{
+    res.json({fail:"添加失败"});
+  })
+});
 
+//更新购物车内容
+app.post("/updatecar",function (req,res) {
+  let {productList,userId} = req.body;
+  let user =req.userData.find(item=>item.userId == userId);
+  user.cart=[...productList];
+  console.log(JSON.stringify(req.userData));
+  // util.setData("./data/user.json",)
+  util.setData("./data/user.json",req.userData,()=>{
+    res.json({user,success:"更新成功"});
+  },()=>{
+    res.json({fail:"更新失败"});
+  })
+});
+//更新后重新获取购物车内容
+app.get("/getNewCart/:userId",function (req,res) {
+  let user = req.userData.find(item=>item.userId=req.params.userId);
+  res.json(user);
 });
 
 
-//购物车删除商品
-
-
-
 //获取购物车信息
-app.get('/getCar',function (req,res) {
-
+app.get('/CartProductList/:id',function (req,res) {
+  let id = req.params.id;
+  let user = req.userData.find(item=>item.userId == id);
+  if(!user){res.json({fail:"没有找到该用户"});}
+  let productList = user.cart.map(item=>{
+    return {product:req.productData[item.productId],count:item.count};
+  });
+  res.json(productList);
 });
 
 

@@ -5,6 +5,7 @@ import "./Profile.less"
 import actions from "../../store/actions/user";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
+import Tab from "../../components/Tab/Tab";
 @connect(state=>({...state.user}),actions)
 @withRouter
 export default class Profile extends React.Component{
@@ -13,7 +14,9 @@ export default class Profile extends React.Component{
       this.props.clearLogin();
       this.props.history.push("/login");
     };
+
     render(){
+      console.log(this.props);
       let{userName,userImg}=this.props.login.user;
       return (
             <div>
@@ -43,6 +46,7 @@ export default class Profile extends React.Component{
                     </ul>
                    <button onClick={this.handleClick}>退出登陆</button>
                 </div>
+              <Tab count={this.props.login}/>
             </div>
         )
     }

@@ -30,7 +30,17 @@ export let login=(data)=>{
 export let reg=(data)=>{
   return axios.post(`/reg`,data);
 };
+//通过用户id获取购物车信息
+export let getCartProductList=(id)=>{
+  return axios.get(`/CartProductList/${id}`);
+};
 
-export let getProduct=(id)=>{
-  return axios.get(`/product/${id}`);
+//更新购物车信息
+export let updateCartProduct = (data)=>{
+  return axios.post('/updatecar',data);
+};
+
+//更新购物车后重新获取购物车内容
+export let getNewCart = (userId)=>{
+  return axios.get(`/getNewCart/${userId}`);
 };

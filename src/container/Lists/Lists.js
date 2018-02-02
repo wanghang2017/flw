@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import "./Lists.less";
 import {connect} from "react-redux";
-import actions from "../../store/actions/products";
+import actions from "../../store/actions/index";
 import {Link} from "react-router-dom";
 @connect(state=>({...state}),actions)
 export default class Lists extends React.Component{
@@ -83,6 +83,11 @@ export default class Lists extends React.Component{
         }
       }
     };
+    handleAdd=(e,item)=>{
+      e.preventDefault();
+      console.log(this.props);
+      this.props.addProduct(item);
+    };
     render(){
       return (
             <div>
@@ -101,7 +106,7 @@ export default class Lists extends React.Component{
                           <li className="lists-item" >
                             <img src={item.productImg}/>
                             <p>{item.productTitle}</p>
-                            <p><span>￥{item.productPrice}</span><em className="iconfont icon-gouwuche"></em></p>
+                            <p><span>￥{item.productPrice}</span><em className="iconfont icon-gouwuche" onClick={(e)=>this.handleAdd(e,item)}></em></p>
                           </li>
                         </Link>
                       ))}

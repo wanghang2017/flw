@@ -12,3 +12,14 @@ export const GET_USER = "get_user";
 export const SET_PRODUCT = "set_product";
 export const CLEAR_REG = "clear_reg";
 export const CLEAR_LOGIN = "clear_login";
+
+
+//cart
+export const CART_PRODUCTLIST = "cart_productlist";
+export const CART_ADD = "cart_add";
+export const CART_MINUS = "cart_minus";
+export const UPDATE_CART = "update_cart";
+export const CART_ADD_PRODUCT = "cart_add_product";
+export const CART_DELETE_PRODUCT = "cart_DELETE_product";
+
+export const UPDATE_NEW_CART = "update_new_cart";
