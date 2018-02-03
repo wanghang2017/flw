@@ -6,11 +6,10 @@ import actions from "../../store/actions/user";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Tab from "../../components/Tab/Tab";
-@connect(state=>({...state.user}),actions)
+@connect(state=>({...state.user,...state.cart}),actions)
 @withRouter
 export default class Profile extends React.Component{
     handleClick=()=>{
-      console.log(this.props);
       this.props.clearLogin();
       this.props.history.push("/login");
     };
@@ -46,7 +45,7 @@ export default class Profile extends React.Component{
                     </ul>
                    <button onClick={this.handleClick}>退出登陆</button>
                 </div>
-              <Tab count={this.props.login}/>
+              <Tab productList={this.props.productList}/>
             </div>
         )
     }

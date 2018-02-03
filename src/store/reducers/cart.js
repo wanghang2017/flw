@@ -2,10 +2,7 @@ import * as Types from "../actionTypes";
 
 let initState={
   productList:[
-    {
-      count:0,
-      product:{}
-    }
+
   ],
 };
 function cart(state=initState,action) {
@@ -21,9 +18,19 @@ function cart(state=initState,action) {
     case Types.UPDATE_CART:
       return {...state};
     case Types.CART_ADD_PRODUCT:
-      let obj={product:action.item,count:1};
-
-      return {productList:[...state.productList,obj]}
+      let product = state.productList.find(item=>{
+        console.log(item);
+        return item.product.productId==action.item.productId;
+      });
+      if(!product){
+        let obj={product:action.item,count:1};
+        return {productList:[...state.productList,obj]}
+      }
+      product.count++;
+      return {productList:[...state.productList]};
+    case Types.CART_DELETE_PRODUCT:
+      let productList = state.productList.filter(item=>item.product.productId!=action.id);
+      return {productList:[...productList]};
   }
   return state;
 }

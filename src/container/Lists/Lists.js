@@ -87,6 +87,10 @@ export default class Lists extends React.Component{
       e.preventDefault();
       console.log(this.props);
       this.props.addProduct(item);
+      if(this.props.user.login.user){
+        let id = this.props.user.login.user.userId;
+        console.log(id,"zzzzz");
+      }
     };
     render(){
       return (

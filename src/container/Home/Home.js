@@ -8,7 +8,7 @@ import actions from "../../store/actions/sliders";
 import home from "../../store/actions/home";
 import * as utils from "../../common/util";
 import Tab from "../../components/Tab/Tab";
-@connect(state=>({sliders:[...state.sliders],homeHot:{...state.homeHot},...state.user}),{...actions,...home})
+@connect(state=>({sliders:[...state.sliders],homeHot:{...state.homeHot},...state.cart}),{...actions,...home})
 export default class Home extends React.Component{
   constructor(){
     super();
@@ -58,7 +58,7 @@ export default class Home extends React.Component{
               <div className="home-pullrefresh">
                 {this.state.top<=100?"下拉可以刷新":"释放立即刷新"}
               </div>
-              <Tab count={this.props.login}/>
+              <Tab productList={this.props.productList}/>
             </div>
         )
     }

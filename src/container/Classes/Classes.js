@@ -4,10 +4,11 @@ import "./Classes.less";
 import Header from "../../components/Header/Header";
 import Tab from "../../components/Tab/Tab";
 import {connect} from "react-redux";
-@connect(state=>({...state.user}))
+@connect(state=>({...state.cart}))
 export default class Classes extends React.Component{
     render(){
-        return (
+      console.log(this.props);
+      return (
           <div>
               <Header hasBack={true} hasSearch={false} title="分类"/>
               <div className="classes-container">
@@ -42,7 +43,7 @@ export default class Classes extends React.Component{
                       </li>
                   </ul>
               </div>
-              <Tab count={this.props.login}/>
+              <Tab productList={this.props.productList}/>
           </div>
         )
     }

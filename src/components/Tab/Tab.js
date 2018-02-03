@@ -3,8 +3,8 @@ import {NavLink as Link} from "react-router-dom";
 import "./Tab.less";
 export default class Tab extends React.Component{
   componentWillMount(){
-    if(this.props.count.user){
-      this.mycount = this.props.count.user.cart.reduce((prev,next)=>{
+    if(this.props.productList.length>0){
+      this.mycount = this.props.productList.reduce((prev,next)=>{
         return prev+next.count;
       },0);
       console.log(this.mycount);

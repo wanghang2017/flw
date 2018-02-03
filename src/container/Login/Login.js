@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import {connect} from "react-redux";
-import actions from "../../store/actions/user";
+import actions from "../../store/actions/index";
 import "./Login.less";
 @connect(state=>({...state.user}),actions)
 export default class Login extends React.Component{
@@ -37,7 +37,7 @@ export default class Login extends React.Component{
         info:newProps.login.success,
         status:1,
       });
-
+      this.props.setCartProductList(newProps.login.user.userId);
       setTimeout(()=>{
         this.props.history.push("/profile");
       },2000);
@@ -49,7 +49,6 @@ export default class Login extends React.Component{
     }
   }
     render(){
-      console.log(this.props);
       return (
             <div>
                 <Header hasBack={true} hasSearch={true} title="登陆"/>

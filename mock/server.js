@@ -94,7 +94,6 @@ app.get('/products/:productClass',function (req,res) {
       break;
   }
 });
-
 //获取轮播图信息
 app.get('/sliders',function (req,res) {
   res.json(req.slidersData);
@@ -139,8 +138,6 @@ app.get('/updateHomeHot',function (req,res) {
   obj={phone,earPhone,computer,household};
   res.json(obj);
 });
-
-
 //购物车添加商品
 app.post("/addproducttocar",function (req,res) {
   let {productId,count,userId} = req.body;
@@ -159,13 +156,12 @@ app.post("/addproducttocar",function (req,res) {
     res.json({fail:"添加失败"});
   })
 });
-
 //更新购物车内容
 app.post("/updatecar",function (req,res) {
   let {productList,userId} = req.body;
   let user =req.userData.find(item=>item.userId == userId);
   user.cart=[...productList];
-  console.log(JSON.stringify(req.userData));
+  // console.log(JSON.stringify(req.userData));
   // util.setData("./data/user.json",)
   util.setData("./data/user.json",req.userData,()=>{
     res.json({user,success:"更新成功"});
@@ -178,8 +174,6 @@ app.get("/getNewCart/:userId",function (req,res) {
   let user = req.userData.find(item=>item.userId=req.params.userId);
   res.json(user);
 });
-
-
 //获取购物车信息
 app.get('/CartProductList/:id',function (req,res) {
   let id = req.params.id;
@@ -190,10 +184,6 @@ app.get('/CartProductList/:id',function (req,res) {
   });
   res.json(productList);
 });
-
-
-
-
 let crypto = require('crypto');
 //用户登陆
 app.post('/login',function (req,res) {
@@ -208,10 +198,6 @@ app.post('/login',function (req,res) {
     res.json({success:"",fail:"账号或密码错误",user:{}});
   }
 });
-
-
-
-
 //用户注册:
 app.post('/reg',function (req,res) {
   let obj = {};
@@ -236,6 +222,3 @@ app.post('/reg',function (req,res) {
 
 });
 //修改用户信息
-
-
-

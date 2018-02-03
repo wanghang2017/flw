@@ -36,12 +36,20 @@ let addProduct = (item)=>{
     });
   }
 };
-
+let deleteProduct = (id)=>{
+  return (dispatch,getState)=>{
+    dispatch({
+      type:Types.CART_DELETE_PRODUCT,
+      id
+    })
+  }
+};
 
 export default {
   setCartProductList,
   cartCountAdd,
   cartCountMinus,
   cartUpdate,
-  addProduct
+  addProduct,
+  deleteProduct
 }
